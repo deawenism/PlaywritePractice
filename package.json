@@ -1,0 +1,14 @@
+{
+  "name": "playwritepractice",
+  "version": "1.0.0",
+  "description": "The goal is to learn Playwrite and Cucumber \r ## Definition of Done\r To finish the Playwrite modules on testing academy",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/node": "^26.6.6"
+  }
+}
