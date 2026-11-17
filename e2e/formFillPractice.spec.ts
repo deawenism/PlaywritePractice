@@ -8,3 +8,9 @@ test('Fill first and last name', async ({ page }) => {
     await expect(page.getByLabel('Last name')).toHaveValue('testlast');
 
 });
+test('Pick Gender radio group', async ({ page }) => {
+    await page.goto('https://app.thetestingacademy.com/playwright/tables/practice');
+    await page.getByRole('radio', {name:'Male',exact:true}).check();
+    await expect(page.getByRole('radio', {name:'Female',exact:true})).toBeChecked({checked:false});
+
+});
