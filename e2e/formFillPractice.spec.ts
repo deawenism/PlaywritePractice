@@ -22,5 +22,6 @@ test('Select years of experience from dropdown', async ({ page }) => {
 
 test('Fill Datefield', async ({ page }) => {
     await page.goto('https://app.thetestingacademy.com/playwright/tables/practice');
-
+    await page.getByLabel('Date').fill('2026-05-04');
+    await expect(page.getByLabel('Date')).toHaveValue('2026-05-04');
 });
