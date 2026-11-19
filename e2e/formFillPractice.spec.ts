@@ -25,3 +25,12 @@ test('Fill Datefield', async ({ page }) => {
     await page.getByLabel('Date').fill('2026-05-04');
     await expect(page.getByLabel('Date')).toHaveValue('2026-05-04');
 });
+
+test('Check checkboxes', async ({ page }) => {
+    await page.goto('https://app.thetestingacademy.com/playwright/tables/practice');
+    await page.getByRole('checkbox', {name:'Protractor',exact:true}).check();
+    await page.getByRole('checkbox', {name:'UFT',exact:true}).check();
+    await expect(page.getByRole('checkbox', {name:'Protractor',exact:true})).toBeChecked();
+    await expect(page.getByRole('checkbox', {name:'UFT',exact:true})).toBeChecked();
+    await expect(page.getByRole('checkbox', {name:'Selenium Webdriver',exact:true})).toBeChecked({checked:false});
+});
