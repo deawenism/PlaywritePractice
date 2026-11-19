@@ -43,3 +43,9 @@ test('Check count', async ({ page }) => {
     const checklist = await page.getByLabel('Continents')
     await expect(await checklist.getByRole('checkbox',{checked:true}).count()).toEqual(3)
 });
+
+test('Selenium Wait', async ({ page }) => {
+    await page.goto('https://app.thetestingacademy.com/playwright/tables/practice');
+    await page.getByRole('tab', {name:'Wait Commands',exact:true}).click();
+    await expect(page.locator('#selenium-tab-panel')).toContainText('Wait commands')
+});
