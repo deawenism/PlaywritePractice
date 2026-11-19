@@ -14,3 +14,13 @@ test('Pick Gender radio group', async ({ page }) => {
     await expect(page.getByRole('radio', {name:'Female',exact:true})).toBeChecked({checked:false});
 
 });
+test('Select years of experience from dropdown', async ({ page }) => {
+    await page.goto('https://app.thetestingacademy.com/playwright/tables/practice');
+    await page.getByLabel('Years of experience').selectOption('5');
+    await expect(page.getByLabel('Years of experience')).toHaveValue('5')
+});
+
+test('Fill Datefield', async ({ page }) => {
+    await page.goto('https://app.thetestingacademy.com/playwright/tables/practice');
+
+});
