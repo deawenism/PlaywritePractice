@@ -34,3 +34,12 @@ test('Check checkboxes', async ({ page }) => {
     await expect(page.getByRole('checkbox', {name:'UFT',exact:true})).toBeChecked();
     await expect(page.getByRole('checkbox', {name:'Selenium Webdriver',exact:true})).toBeChecked({checked:false});
 });
+
+test('Check count', async ({ page }) => {
+    await page.goto('https://app.thetestingacademy.com/playwright/tables/practice');
+    await page.getByRole('checkbox', {name:'Europe',exact:true}).check();
+    await page.getByRole('checkbox', {name:'Africa',exact:true}).check();
+    await page.getByRole('checkbox', {name:'Australia',exact:true}).check();
+    const checklist = await page.getByLabel('Continents')
+    await expect(await checklist.getByRole('checkbox',{checked:true}).count()).toEqual(3)
+});
