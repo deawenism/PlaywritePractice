@@ -49,3 +49,9 @@ test('Selenium Wait', async ({ page }) => {
     await page.getByRole('tab', {name:'Wait Commands',exact:true}).click();
     await expect(page.locator('#selenium-tab-panel')).toContainText('Wait commands')
 });
+
+test('Image Upload', async ({ page }) => {
+    await page.goto('https://app.thetestingacademy.com/playwright/tables/practice');
+    await page.locator('input[type="file"]').setInputFiles('dog.png');
+    await expect(page.locator('#upload-file-name')).toContainText('dog.png')
+});
