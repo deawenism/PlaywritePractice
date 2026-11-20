@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+import { isDeepStrictEqual } from 'node:util';
+
 test('Fill first and last name', async ({ page }) => {
     await page.goto('https://app.thetestingacademy.com/playwright/tables/practice');
     await page.getByLabel('First name').fill('testfirst');
@@ -63,6 +65,21 @@ test('File Download', async ({ page }) => {
     await page.locator('#download-file').click()
     const downloadComplete = await downloadpromise;
     expect(downloadComplete.suggestedFilename()).toBe('sample-download.txt')
-    
+});
+test('Full Flow', async ({ page }) => {
+    await page.goto('https://app.thetestingacademy.com/playwright/tables/practice');
+    await page.getByLabel('First name').fill('testfirst');
+    await page.getByLabel('Last name').fill('testlast');
+    await page.getByRole('radio', {name:'Male',exact:true}).check();
+    await page.getByRole('radio', {name:'Manual Tester',exact:true}).check();
+    await page.getByLabel('Years of experience').selectOption('5');
+    await page.getByLabel('Date').fill('2026-05-04');
+    await page.getByRole('checkbox', {name:'Protractor',exact:true}).check();
+    await page.getByRole('checkbox', {name:'UFT',exact:true}).check();
+    await page.getByRole('checkbox', {name:'Europe',exact:true}).check();
+    await page.getByRole('checkbox', {name:'Africa',exact:true}).check();
+    await page.getByRole('checkbox', {name:'Australia',exact:true}).check();
+    await page.getByRole('button',{name:'Save profile',exact:true}).click();
+    expect(page.locator('#submission-output')).toContainText("{\n  \"firstName\": \"testfirst\",\n  \"lastName\": \"testlast\",\n  \"gender\": \"Male\",\n  \"yearsExperience\": \"5\",\n  \"date\": \"2026-05-04\",\n  \"profession\": \"Manual Tester\",\n  \"tools\": [\n    \"UFT\",\n    \"Protractor\"\n  ],\n  \"continents\": [\n    \"Europe\",\n    \"Africa\",\n    \"Australia\"\n  ],\n  \"upload\": {}\n}")
 
 });
