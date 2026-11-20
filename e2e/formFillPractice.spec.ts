@@ -55,3 +55,14 @@ test('Image Upload', async ({ page }) => {
     await page.locator('input[type="file"]').setInputFiles('dog.png');
     await expect(page.locator('#upload-file-name')).toContainText('dog.png')
 });
+
+test('File Download', async ({ page }) => {
+    await page.goto('https://app.thetestingacademy.com/playwright/tables/practice');
+    const downloadpromise = page.waitForEvent('download')
+    await expect(page.locator('#download-file')).toHaveAttribute('href','/playwright/sample-download.txt')
+    await page.locator('#download-file').click()
+    const downloadComplete = await downloadpromise;
+    expect(downloadComplete.suggestedFilename()).toBe('sample-download.txt')
+    
+
+});
